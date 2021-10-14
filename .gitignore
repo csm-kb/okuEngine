@@ -46,3 +46,7 @@ _deps
 
 # Ignore test executable
 okutest*
+
+# Build directory + VSCode
+.vscode
+build
