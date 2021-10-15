@@ -1,6 +1,7 @@
 #ifndef OKUENGINE_CORE_H
 #define OKUENGINE_CORE_H
 
+#include <okuEngine/input.hpp>
 #include <okuEngine/exceptions.hpp>
 
 #include <memory>
@@ -36,11 +37,13 @@ constexpr auto type_name() {
 namespace okuEngine {
 	// pre-declarations
 	class Engine;
-	typedef std::unique_ptr<Engine> Engine_t;
+	// typedef std::unique_ptr<Engine> Engine_t;
 
 	/**
 	 * Engine service locator. Helps bind IService types to their actual
 	 * implementations at runtime as opposed to compile-time.
+	 * 
+	 * TODO: add defined services so that we can gracefully clean them up on shutdown
 	 */
 	template<class T>
 	class ServiceLocator final {
@@ -58,6 +61,7 @@ namespace okuEngine {
 			}
 			return *currGlobalInstance;
 		}
+		static void Shutdown();
 	};
 
 	/**
@@ -87,6 +91,14 @@ namespace okuEngine {
 		 * Once ready, the engine will call into the core loop.
 		 */
 		static void CoreLoop();
+		/**
+		 * Called when the engine moves to gracefully shut down.
+		 */
+		static void Shutdown();
+		/**
+		 * Can be called by anything within the engine to ask it to gracefully quit.
+		 */
+		static void Quit();
 
 	private:
 		// static Engine_t engine;
@@ -108,10 +120,6 @@ namespace okuEngine {
 	template<class T>
 	std::unique_ptr<T> InitService () {
 		return std::make_unique<T>(T());
-	}
-
-	namespace Renderer {
-		class IRenderer;
 	}
 
 	namespace Audio {
