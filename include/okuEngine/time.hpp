@@ -10,7 +10,7 @@ namespace okuEngine {
         inline static double fixedDeltaTime = 0.02;
     private:
         Time();
-    }
+    };
 }
 
 #endif
