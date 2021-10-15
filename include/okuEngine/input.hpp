@@ -10,133 +10,71 @@ namespace okuEngine {
      * @brief Enum containing all pressable keys on the keyboard.
      */
     enum class Keys {
-        Backspace = 0x08,
-        Tab = 0x09,
-        Clear = 0x0C,
-        Enter = 0x0D,
-        Shift = 0x10,
-        Control = 0x11,
-        Alt = 0x12,
-        Pause = 0x13,
-        CapsLock = 0x14,
-        Escape = 0x1B,
-        Space = 0x20,
-        PageUp = 0x21,
-        PageDown = 0x22,
-        End = 0x23,
-        Home = 0x24,
-        Left = 0x25,
-        Up = 0x26,
-        Right = 0x27,
-        Down = 0x28,
-        Select = 0x29,
-        Execute = 0x2B,
-        PrintScreen = 0x2C,
-        Insert = 0x2D,
-        Delete = 0x2E,
-        Help = 0x2F,
-        Alpha0 = 0x30,
-        Alpha1 = 0x31,
-        Alpha2 = 0x32,
-        Alpha3 = 0x33,
-        Alpha4 = 0x34,
-        Alpha5 = 0x35,
-        Alpha6 = 0x36,
-        Alpha7 = 0x37,
-        Alpha8 = 0x38,
-        Alpha9 = 0x39,
-        A = 0x41,
-        B = 0x42,
-        C = 0x43,
-        D = 0x44,
-        E = 0x45,
-        F = 0x46,
-        G = 0x47,
-        H = 0x48,
-        I = 0x49,
-        J = 0x4A,
-        K = 0x4B,
-        L = 0x4C,
-        M = 0x4D,
-        N = 0x4E,
-        O = 0x4F,
-        P = 0x50,
-        Q = 0x51,
-        R = 0x52,
-        S = 0x53,
-        T = 0x54,
-        U = 0x55,
-        V = 0x56,
-        W = 0x57,
-        X = 0x58,
-        Y = 0x59,
-        Z = 0x5A,
-        LeftWinKey = 0x5B,
-        RightWinKey = 0x5C,
-        AppKey = 0x5D,
-        Sleep = 0x5F,
-        NumPad0 = 0x60,
-        NumPad1 = 0x61,
-        NumPad2 = 0x62,
-        NumPad3 = 0x63,
-        NumPad4 = 0x64,
-        NumPad5 = 0x65,
-        NumPad6 = 0x66,
-        NumPad7 = 0x67,
-        NumPad8 = 0x68,
-        NumPad9 = 0x69,
-        Multiply = 0x6A,
-        Add = 0x6B,
-        Separator = 0x6C,
-        Subtract = 0x6D,
-        Decimal = 0x6E,
-        Divide = 0x6F,
-        F1 = 0x70,
-        F2 = 0x71,
-        F3 = 0x72,
-        F4 = 0x73,
-        F5 = 0x74,
-        F6 = 0x75,
-        F7 = 0x76,
-        F8 = 0x77,
-        F9 = 0x78,
-        F10 = 0x79,
-        F11 = 0x7A,
-        F12 = 0x7B,
-        F13 = 0x7C,
-        F14 = 0x7D,
-        F15 = 0x7E,
-        F16 = 0x7F,
-        F17 = 0x80,
-        F18 = 0x81,
-        F19 = 0x82,
-        F20 = 0x83,
-        F21 = 0x84,
-        F22 = 0x85,
-        F23 = 0x86,
-        F24 = 0x87,
-        NumLock = 0x90,
-        ScrollLock = 0x91,
-        LeftShift = 0xA0,
-        RightShift = 0xA1,
-        LeftControl = 0xA2,
-        RightContol = 0xA3,
-        LeftMenu = 0xA4,
-        RightMenu = 0xA5,
-        VolumeMute = 0xAD,
-        VolumeDown = 0xAE,
-        VolumeUp = 0xAF,
-        NextTrack = 0xB0,
-        PreviousTrack = 0xB1,
-        StopMedia = 0xB2,
-        PlayPause = 0xB3,
-        LaunchMail = 0xB4,
-        SelectMedia = 0xB5,
-        _MAXVALUE = 0xB6
+        Backspace = 0x00,
+        Tab,Clear,Enter,
+        // modifier keys
+        Shift,Control,Alt,
+        Pause,
+        CapsLock,
+        Escape,
+        // spacebar
+        Space,
+        // the six-stack above the arrow keys
+        PageUp,PageDown,End,
+        Home,Insert,Delete,
+        // arrow keys
+        Left,Up,Right,Down,
+        Select,
+        Execute,
+        PrintScreen,
+        Help,
+        // numbers above the letters
+        Alpha0,Alpha1,Alpha2,
+        Alpha3,Alpha4,Alpha5,
+        Alpha6,Alpha7,Alpha8,Alpha9,
+        // letters
+        A,B,C,D,E,F,G,H,I,J,K,L,M,
+        N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
+        // other keys
+        LeftWinKey,
+        RightWinKey,
+        AppKey,
+        Sleep,
+        // numpad keys
+        NumPad0,NumPad1,NumPad2,
+        NumPad3,NumPad4,NumPad5,
+        NumPad6,NumPad7,NumPad8,NumPad9,
+        Multiply,Add,Separator,Subtract,Decimal,Divide,
+        // function keys
+        F1,F2,F3,F4,F5,F6,
+        F7,F8,F9,F10,F11,F12,
+        F13,F14,F15,F16,F17,F18,
+        F19,F20,F21,F22,F23,F24,
+        // more keys
+        NumLock,
+        ScrollLock,
+        LeftShift,
+        RightShift,
+        LeftControl,
+        RightContol,
+        LeftMenu,
+        RightMenu,
+        VolumeMute,
+        VolumeDown,
+        VolumeUp,
+        NextTrack,
+        PreviousTrack,
+        StopMedia,
+        PlayPause,
+        LaunchMail,
+        SelectMedia,
+        _MAXVALUE // used for array allocation -- DO NOT TOUCH, will not trigger
     };
 
     enum class Mouse {
-        LeftButton, CenterButton, RightButton
+        LeftButton = 0x01, MiddleButton, RightButton,
+        X1, X2,
+        _MAXVALUE // used for array allocation -- DO NOT TOUCH, will not trigger
     };
     }
 
@@ -144,11 +82,48 @@ namespace okuEngine {
     public:
         virtual void ProcessInput() = 0;
 
-        // TODO: use an input manager to name buttons and map them to keys
+        // TODO: use an input manager to:
+            // name buttons and map them to keys
+            // name axes and map them to keys or variable inputs (mouse)
 
+        /**
+         * @brief Get whether the given Key is currently pressed down (held).
+         * @param key the Input::Keys enum corresponding to a keyboard key.
+         */
         virtual bool GetKey(Input::Keys key) = 0;
+        /**
+         * @brief Returns true the frame that a key is pressed.
+         * The state resets internally after every frame.
+         * @param key the Input::Keys enum corresponding to a keyboard key.
+         */
         virtual bool GetKeyDown(Input::Keys key) = 0;
+        /**
+         * @brief Returns true the frame that a key is released.
+         * The state resets internally after every frame.
+         * @param key the Input::Keys enum corresponding to a keyboard key.
+         */
         virtual bool GetKeyUp(Input::Keys key) = 0;
+        /**
+         * @brief Get whether the given mouse button is currently pressed down (held).
+         * @param btn the Input::Mouse enum corresponding to a keyboard key.
+         */
+        virtual bool GetMouseButton(Input::Mouse btn) = 0;
+        /**
+         * @brief Returns true the frame that a mouse button is pressed.
+         * @param btn the Input::Mouse enum corresponding to a mouse button.
+         */
+        virtual bool GetMouseButtonDown(Input::Mouse btn) = 0;
+        /**
+         * @brief Returns true the frame that a mouse button is released.
+         * @param btn the Input::Mouse enum corresponding to a keyboard key.
+         */
+        virtual bool GetMouseButtonUp(Input::Mouse btn) = 0;
+        /**
+         * @brief Returns true the frame that a mouse button is released.
+         * @param axis the name of a labeled axis.
+         * @return a float in the range [-1,1] for non-mouse axes, or a mouse delta.
+         */
+        virtual float GetAxis(std::string axis) = 0;
 
         virtual void RegisterKeyInputListener() = 0;
         virtual void RegisterMouseButtonListener() = 0;
@@ -160,18 +135,24 @@ namespace okuEngine {
 
     class InputHandler final : public IInputHandler {
     public:
-        void ProcessInput();
+        void ProcessInput() override;
 
-        bool GetKey(Input::Keys key);
-        bool GetKeyDown(Input::Keys key);
-        bool GetKeyUp(Input::Keys key);
+        bool GetKey(Input::Keys key) override;
+        bool GetKeyDown(Input::Keys key) override;
+        bool GetKeyUp(Input::Keys key) override;
 
-        void RegisterKeyInputListener();
-        void RegisterMouseButtonListener();
-        void RegisterMouseMotionListener();
-        void UnregisterKeyInputListener();
-        void UnregisterMouseButtonListener();
-        void UnregisterMouseMotionListener();
+        bool GetMouseButton(Input::Mouse btn) override;
+        bool GetMouseButtonDown(Input::Mouse btn) override;
+        bool GetMouseButtonUp(Input::Mouse btn) override;
+
+        float GetAxis(std::string axis) override;
+
+        void RegisterKeyInputListener() override;
+        void RegisterMouseButtonListener() override;
+        void RegisterMouseMotionListener() override;
+        void UnregisterKeyInputListener() override;
+        void UnregisterMouseButtonListener() override;
+        void UnregisterMouseMotionListener() override;
     private:
         static const std::map<int,Input::Keys> sdlToKeyMap;
         /** Flags in this array are set while a key is held. */
@@ -180,6 +161,12 @@ namespace okuEngine {
         std::array<bool,(int)Input::Keys::_MAXVALUE> _KEYS_DOWN;
         /** Flags in this array are set only for the frame a key is released. */
         std::array<bool,(int)Input::Keys::_MAXVALUE> _KEYS_UP;
+        /** Flags in this array are set while a mouse button is held. */
+        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_HELD;
+        /** Flags in this array are set only for the frame a mouse button is pressed. */
+        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_DOWN;
+        /** Flags in this array are set only for the frame a mouse button is released. */
+        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_UP;
     };
 
 }

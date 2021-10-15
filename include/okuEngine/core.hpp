@@ -133,4 +133,4 @@ namespace okuEngine {
 	class IResourceHandler;
 }
 
-#endif
+#endif //OKUENGINE_CORE_H

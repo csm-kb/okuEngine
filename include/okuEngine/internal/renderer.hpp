@@ -30,15 +30,10 @@ namespace okuEngine {
     class Renderer : public IRenderer {
     public:
         Renderer();
-        /** Initializes the renderer. */
-        bool Initialize();
 
-        /** Tells the renderer to shut down. */
-        void Shutdown();
-
-        
-
-        void Render(double deltaTime, bool engineRunning);
+        bool Initialize() override;
+        void Shutdown() override;
+        void Render(double deltaTime, bool engineRunning) override;
 
     private:
         void InitOpenGL();
@@ -63,4 +58,4 @@ namespace okuEngine {
     };
 }
 
-#endif
+#endif //OKUENGINE_RENDERER_H

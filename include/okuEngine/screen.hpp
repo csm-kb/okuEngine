@@ -1,0 +1,6 @@
+#ifndef OKUENGINE_SCREEN_H
+#define OKUENGINE_SCREEN_H
+
+//TODO
+
+#endif //OKUENGINE_SCREEN_H

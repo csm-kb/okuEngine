@@ -7,7 +7,7 @@
 namespace okuEngine {
     // need to map SDL to our internal input system
     
-    const std::map<int,Input::Keys> sdlToKeyMap = {
+    const std::map<int,Input::Keys> InputHandler::sdlToKeyMap = {
         {SDLK_BACKSPACE, Input::Keys::Backspace},
         {SDLK_TAB, Input::Keys::Tab},
         {SDLK_CLEAR, Input::Keys::Clear},
@@ -137,6 +137,12 @@ namespace okuEngine {
     };
 
     void InputHandler::ProcessInput() {
+        for (int i = 0; i < (int)Input::Keys::_MAXVALUE; i++) {
+            // reset state for all keys from previous frame
+            _KEYS_DOWN[i] = false;
+            _KEYS_UP[i] = false;
+        }
+        // now poll for an input event from SDL
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -144,47 +150,62 @@ namespace okuEngine {
                     Engine::Quit();
                     return;
                 }
-                // case SDL_KEYDOWN:{
-                //     // handle key down input
-                //     if (event.key.keysym.sym < 323)
-                //         KEYS[event.key.keysym.sym] = true;
-                //     for (const auto& listener : keyInputListeners) {
-                //         listener->update(true, event.key);
-                //     }
-                //     break;
-                // }
-                // case SDL_KEYUP: {
-                //     // handle key up input
-                //     if (event.key.keysym.sym < 323)
-                //         KEYS[event.key.keysym.sym] = false;
-                //     for (const auto& listener : keyInputListeners) {
-                //         listener->update(false, event.key);
-                //     }
-                //     break;
-                // }
-                // case SDL_MOUSEBUTTONDOWN: {
-                //     // handle mouse button down
-                //     MOUSE[event.button.button] = true;
-                //     for (const auto& listener : mouseButtonListeners) {
-                //         listener->update(event.button);
-                //     }
-                //     break;
-                // }
-                // case SDL_MOUSEBUTTONUP: {
-                //     // handle mouse button up
-                //     MOUSE[event.button.button] = false;
-                //     for (const auto& listener : mouseButtonListeners) {
-                //         listener->update(event.button);
-                //     }
-                //     break;
-                // }
-                // case SDL_MOUSEMOTION: {
-                //     // handle mouse motion
-                //     for (const auto& listener : mouseMotionListeners) {
-                //         listener->update(event.motion);
-                //     }
-                //     break;
-                // }
+                // sent when the key is first pressed
+                case SDL_KEYDOWN:{
+                    // handle key down input
+                    if (auto it{sdlToKeyMap.find( event.key.keysym.sym )}; it != std::end(sdlToKeyMap)) {
+                        // if key exists in our map, then mark that key
+                        // it was also pressed this frame
+                        _KEYS_HELD[(int)it->second] = _KEYS_DOWN[(int)it->second] = true;
+                    }
+
+                    // for (const auto& listener : keyInputListeners) {
+                    //     listener->update(true, event.key);
+                    // }
+                    break;
+                }
+                // sent when the key is released
+                case SDL_KEYUP: {
+                    // handle key up input
+                    if (auto it{sdlToKeyMap.find( event.key.keysym.sym )}; it != std::end(sdlToKeyMap)) {
+                        // if key exists in our map, then unmark that key
+                        this->_KEYS_HELD[(int)it->second] = false;
+                        // but mark that it has been released this frame
+                        this->_KEYS_UP[(int)it->second] = true;
+                    }
+
+                    // for (const auto& listener : keyInputListeners) {
+                    //     listener->update(false, event.key);
+                    // }
+                    break;
+                }
+                case SDL_MOUSEBUTTONDOWN: {
+                    // handle mouse button down
+                    // mark mouse as down + pressed this frame
+                    this->_MOUSE_HELD[event.button.button] =
+                    this->_MOUSE_DOWN[event.button.button] = true;
+                    // for (const auto& listener : mouseButtonListeners) {
+                    //     listener->update(event.button);
+                    // }
+                    break;
+                }
+                case SDL_MOUSEBUTTONUP: {
+                    // handle mouse button up
+                    this->_MOUSE_HELD[event.button.button] = false;
+                    // mark that it was released this frame
+                    this->_MOUSE_UP[event.button.button] = true;
+                    // for (const auto& listener : mouseButtonListeners) {
+                    //     listener->update(event.button);
+                    // }
+                    break;
+                }
+                case SDL_MOUSEMOTION: {
+                    // handle mouse motion
+                    // for (const auto& listener : mouseMotionListeners) {
+                    //     listener->update(event.motion);
+                    // }
+                    break;
+                }
             }
         }
     }
@@ -193,6 +214,13 @@ namespace okuEngine {
     bool InputHandler::GetKeyDown(Input::Keys key) { return _KEYS_DOWN[(int)key]; }
     bool InputHandler::GetKeyUp(Input::Keys key) { return _KEYS_UP[(int)key]; }
 
+    bool InputHandler::GetMouseButton(Input::Mouse btn) { return _MOUSE_HELD[(int)btn]; }
+    bool InputHandler::GetMouseButtonDown(Input::Mouse btn) { return _MOUSE_DOWN[(int)btn]; }
+    bool InputHandler::GetMouseButtonUp(Input::Mouse btn) { return _MOUSE_UP[(int)btn]; }
+
+    float InputHandler::GetAxis(std::string axis) {
+        // TODO
+    }
 
     void InputHandler::RegisterKeyInputListener() {
         
