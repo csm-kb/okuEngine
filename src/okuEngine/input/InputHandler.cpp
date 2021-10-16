@@ -138,9 +138,14 @@ namespace okuEngine {
 
     void InputHandler::ProcessInput() {
         for (int i = 0; i < (int)Input::Keys::_MAXVALUE; i++) {
-            // reset state for all keys from previous frame
+            // reset state for all keys down/up from previous frame
             _KEYS_DOWN[i] = false;
             _KEYS_UP[i] = false;
+        }
+        for (int i = 0; i < (int)Input::Mouse::_MAXVALUE; i++) {
+            // reset state for all mouse buttons down/up from previous frame
+            _MOUSE_DOWN[i] = false;
+            _MOUSE_UP[i] = false;
         }
         // now poll for an input event from SDL
         SDL_Event event;
