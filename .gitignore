@@ -48,5 +48,6 @@ _deps
 okutest*
 
 # Build directory + VSCode
+.vs
 .vscode
 build
