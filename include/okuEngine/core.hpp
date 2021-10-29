@@ -53,7 +53,15 @@ namespace okuEngine {
 		ServiceLocator() {}
 		inline static std::unique_ptr<T> currGlobalInstance;
 	public:
+		/**
+		 * @brief Binds a given service instance to this service type.
+		 * @param value A unique pointer to the service instance.
+		 */
 		static void Bind(std::unique_ptr<T> value) { currGlobalInstance = std::move(value); }
+		/**
+		 * @brief Returns a reference to the service instance located for this type.
+		 * Throws a `ServiceNotBoundException` if no service is bound for the type.
+		 */
 		static T& Get() {
 			if (currGlobalInstance == nullptr) {
 				throw ServiceNotBoundException(
@@ -102,6 +110,17 @@ namespace okuEngine {
 		 */
 		static void Quit();
 
+		/**
+		 * @brief Helper function for initializing an engine service.
+		 * 
+		 * @tparam T The service class type. Should NOT be the interface.
+		 * @return std::unique_ptr<T> A unique pointer for the service instance.
+		 */
+		template<class T>
+		static std::unique_ptr<T> InitService () {
+			return std::make_unique<T>(T());
+		}
+
 	private:
 		// static Engine_t engine;
 		Engine() {}
@@ -112,17 +131,6 @@ namespace okuEngine {
 
 namespace okuEngine {
 	/* Engine service interfaces and initializers */
-
-	/**
-	 * @brief Helper function for initializing an engine service.
-	 * 
-	 * @tparam T The service class type. Should NOT be the interface.
-	 * @return std::unique_ptr<T> A unique pointer for the service instance.
-	 */
-	template<class T>
-	std::unique_ptr<T> InitService () {
-		return std::make_unique<T>(T());
-	}
 
 	namespace Audio {
 		class IAudio;

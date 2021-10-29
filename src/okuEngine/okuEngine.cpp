@@ -13,7 +13,8 @@ namespace okuEngine {
 
     template <typename T>
     void ServiceLocator<T>::Shutdown() {
-        // TODO
+        try { Get().Shutdown(); }
+        catch (std::exception const &e) {};
     }
 
     bool Engine::Initialize() {
@@ -72,7 +73,7 @@ namespace okuEngine {
 
         // TODO: clean up inputs
         // TODO: clean up renderer
-        ServiceLocator<IRenderer>::Get().Shutdown();
+        ServiceLocator<IRenderer>::Shutdown();
         // TODO: clean up ServiceLocator (all services)
         SDL_Quit();
     }

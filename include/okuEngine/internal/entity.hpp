@@ -59,24 +59,29 @@ namespace okuEngine {
     };
 
     class Entity {
+        friend class std::hash<Entity>;
     public:
+        /////////////////////////////////////////////////////
+        //**// Public members //**//
+        oString name;
+
         ////////////////////////////////////////////
         //!!**// Global Static Functions //**!!//
         ////////////////////////////////////////////
         /**
-         * @brief Returns the first entity with the given name, or null
+         * @brief Returns the first entity with the given name, or `null` if none exists.
          */
         static Entity Find(oString name);
         /**
-         * @brief Returns a clone of the original entity.
+         * @brief Returns a list of Entities with the given tag. List may return empty.
          */
         static oList<Entity> FindAllWithTag(oString tag);
         /**
          * @brief Returns a clone of the original entity.
          */
-        static Entity Instantiate(Entity original);
-        static Entity Instantiate(Entity original, Transform parent);
-        static Entity Instantiate(Entity original, Transform parent, bool inWorldSpace);
+        static Entity Instantiate(Entity const& original);
+        static Entity Instantiate(Entity const& original, Transform& parent);
+        static Entity Instantiate(Entity const& original, Transform& parent, bool inWorldSpace);
         // TODO: overload with parent transform (becomes parent of entity)
         // TODO: overload with parent transform, world-space instantiation
         // TODO: overload with vector3 position, quaternion rotation
@@ -129,7 +134,29 @@ namespace okuEngine {
 
         template <class T>
         T GetComponent();
+
+        /////////////////////////////////////////////////////
+        //**// Operators //**//
+        bool operator==(Entity const& rhs) {
+            return instanceId == rhs.instanceId;
+        }
+        operator oString() const { return name; }
+        friend std::ostream & operator <<(std::ostream &out, const Entity &obj) {
+            return out << static_cast<std::string>(obj);
+        }
+    private:
+        unsigned long instanceId;
     };
 }
+/**
+ * @brief Hash function for `Entity` objects.
+ */
+template<> struct std::hash<okuEngine::Entity> {
+    std::size_t operator()(okuEngine::Entity const& s) const noexcept {
+        std::size_t h1 = std::hash<unsigned long>{}(s.instanceId);
+        std::size_t h2 = std::hash<std::string>{}(s.name);
+        return h1 ^ (h2 << 1); //0x60000005
+    }
+};
 
 #endif //OKUENGINE_ENTITY_H
