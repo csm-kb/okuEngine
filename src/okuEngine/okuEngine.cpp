@@ -26,8 +26,8 @@ namespace okuEngine {
         // next, initialize input
         ServiceLocator<IInputHandler>::Bind(InitService<InputHandler>());
 
-        // TODO: call Awake() on all registered game objects
-        // TODO: call OnEnable() on all enabled game objects
+        // TODO: call Awake() on all start-registered game objects
+        // TODO: call OnEnable() on all start-enabled game objects
 
         isRunning = true;
 
@@ -36,6 +36,8 @@ namespace okuEngine {
 
     void Engine::CoreLoop() {
         // TODO: call Start() on all registered game objects before loop
+            // new game objects go through Awake->(OnEnable)->Start
+            // when they're runtime-created
 
         IRenderer& renderer = ServiceLocator<IRenderer>::Get();
         IInputHandler& inputHandler = ServiceLocator<IInputHandler>::Get();
@@ -53,7 +55,8 @@ namespace okuEngine {
 
             // TODO: call OnGUI() once per UI event
 
-            // TODO: if pause then call OnApplicationPause(bool)
+            // TODO: if pause this frame then call OnApplicationPause(bool)
+                // on everything
 
             // TODO: if stop then call to Shutdown
             if (!isRunning) break;

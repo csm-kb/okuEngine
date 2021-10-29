@@ -1,8 +1,7 @@
 #ifndef OKUENGINE_INPUT_H
 #define OKUENGINE_INPUT_H
 
-#include <map>
-#include <array>
+#include <okuEngine/types.hpp>
 
 namespace okuEngine {
     namespace Input {
@@ -154,19 +153,19 @@ namespace okuEngine {
         void UnregisterMouseButtonListener() override;
         void UnregisterMouseMotionListener() override;
     private:
-        static const std::map<int,Input::Keys> sdlToKeyMap;
+        static const oMap<int,Input::Keys> sdlToKeyMap;
         /** Flags in this array are set while a key is held. */
-        std::array<bool,(int)Input::Keys::_MAXVALUE> _KEYS_HELD;
+        oArray<bool,(int)Input::Keys::_MAXVALUE> _KEYS_HELD;
         /** Flags in this array are set only for the frame a key is pressed. */
-        std::array<bool,(int)Input::Keys::_MAXVALUE> _KEYS_DOWN;
+        oArray<bool,(int)Input::Keys::_MAXVALUE> _KEYS_DOWN;
         /** Flags in this array are set only for the frame a key is released. */
-        std::array<bool,(int)Input::Keys::_MAXVALUE> _KEYS_UP;
+        oArray<bool,(int)Input::Keys::_MAXVALUE> _KEYS_UP;
         /** Flags in this array are set while a mouse button is held. */
-        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_HELD;
+        oArray<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_HELD;
         /** Flags in this array are set only for the frame a mouse button is pressed. */
-        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_DOWN;
+        oArray<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_DOWN;
         /** Flags in this array are set only for the frame a mouse button is released. */
-        std::array<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_UP;
+        oArray<bool,(int)Input::Mouse::_MAXVALUE> _MOUSE_UP;
     };
 
 }

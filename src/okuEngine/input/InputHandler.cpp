@@ -7,7 +7,7 @@
 namespace okuEngine {
     // need to map SDL to our internal input system
     
-    const std::map<int,Input::Keys> InputHandler::sdlToKeyMap = {
+    const oMap<int,Input::Keys> InputHandler::sdlToKeyMap = {
         {SDLK_BACKSPACE, Input::Keys::Backspace},
         {SDLK_TAB, Input::Keys::Tab},
         {SDLK_CLEAR, Input::Keys::Clear},
@@ -225,6 +225,7 @@ namespace okuEngine {
 
     float InputHandler::GetAxis(std::string axis) {
         // TODO
+        return 0.0;
     }
 
     void InputHandler::RegisterKeyInputListener() {

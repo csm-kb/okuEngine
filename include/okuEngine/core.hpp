@@ -1,8 +1,10 @@
 #ifndef OKUENGINE_CORE_H
 #define OKUENGINE_CORE_H
 
+#include <okuEngine/types.hpp>
 #include <okuEngine/input.hpp>
 #include <okuEngine/exceptions.hpp>
+#include <okuEngine/internal/entity.hpp>
 
 #include <memory>
 #include <string_view>
